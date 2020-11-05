@@ -27,7 +27,7 @@ class _LocationScreenState extends State<LocationScreen> {
         body: SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
               Container(
                 child: Align(
@@ -37,6 +37,9 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: Icon(Icons.local_hospital,color: Colors.white,size: 45.0,),
                   ),
                 ),
+              ),
+              SizedBox(
+                height: 10.0,
               ),
               Column(
                 children: <Widget>[
