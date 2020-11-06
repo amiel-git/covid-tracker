@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:covid_tracker/utilities/constants.dart';
 import 'package:lottie/lottie.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:covid_tracker/tools/location.dart';
 
 class LocationScreen extends StatefulWidget {
   @override
@@ -34,7 +35,14 @@ class _LocationScreenState extends State<LocationScreen> {
                   alignment: Alignment.centerRight,
                   child: Padding(
                     padding: const EdgeInsets.only(right:8.0,top: 8.0),
-                    child: Icon(Icons.local_hospital,color: Colors.white,size: 45.0,),
+                    child: GestureDetector(
+                        onTap: () async{
+                          var location = Location();
+                          await location.getLocation();
+                          print(location.country);
+                        },
+                        child: Icon(Icons.local_hospital,color: Colors.white,size: 45.0,)
+                    ),
                   ),
                 ),
               ),
