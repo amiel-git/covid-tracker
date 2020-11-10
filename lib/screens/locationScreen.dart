@@ -4,6 +4,8 @@ import 'package:covid_tracker/utilities/constants.dart';
 import 'package:lottie/lottie.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:covid_tracker/tools/location.dart';
+import 'package:covid_tracker/tools/networking.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 
 class LocationScreen extends StatefulWidget {
   @override
@@ -11,10 +13,45 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+  String country = "";
+  int cases = 0;
+  int deaths = 0;
+  int recovered = 0;
+  String date_last_updated = "";
+  var data;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getDataAndUpdateUI();
+
+    super.initState();
+
+  }
+  Future<void> getDataAndUpdateUI() async {
+      
+      var location = Location();
+      EasyLoading.show(status: 'loading...');
+      await location.getLocation();
+      data = await NetworkHelper().getLatestCountryData(location.country);
+      updateUI(data);
+      EasyLoading.dismiss(animation: true);
+  }
+
+  void updateUI(data) {
+    setState(() {
+      country           =  data['Country'];
+      cases             =  data['Confirmed'];
+      deaths            =  data['Deaths'];
+      recovered         =  data['Recovered'];
+      date_last_updated =  data['Date'];
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: Scaffold(
+
+    return Scaffold(
         bottomNavigationBar: CurvedNavigationBar(
           height: 48,
           backgroundColor: Color(0xFF389FA7),
@@ -36,10 +73,10 @@ class _LocationScreenState extends State<LocationScreen> {
                   child: Padding(
                     padding: const EdgeInsets.only(right:8.0,top: 8.0),
                     child: GestureDetector(
-                        onTap: () async{
-                          var location = Location();
-                          await location.getLocation();
-                          print(location.country);
+                        onTap: () {
+                          EasyLoading.show(status: 'loading...');
+                            getDataAndUpdateUI();
+
                         },
                         child: Icon(Icons.local_hospital,color: Colors.white,size: 45.0,)
                     ),
@@ -62,7 +99,7 @@ class _LocationScreenState extends State<LocationScreen> {
                     children: <Widget>[
                       Text('Date Last Updated: ', textAlign: TextAlign.left,
                       style: kUpdateTextStyle,),
-                      Text('11-05-2020 17:58',textAlign: TextAlign.left,
+                      Text(date_last_updated,textAlign: TextAlign.left,
                       style: kUpdateContentTextStyle,)
                     ],
                   )
@@ -86,7 +123,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   text: new TextSpan(
                   children: <TextSpan>[
                   new TextSpan(text: 'Country:  ', style: kTableTitleTextStyle),
-                  new TextSpan(text: 'Philippines', style: kTableValuesContentTextStyle),
+                  new TextSpan(text: country, style: kTableValuesContentTextStyle),
                           ],
                         ),
                     ),
@@ -97,7 +134,7 @@ class _LocationScreenState extends State<LocationScreen> {
                          text: new TextSpan(
                            children: <TextSpan>[
                              new TextSpan(text: 'Total Cases:  ', style: kTableTitleTextStyle),
-                             new TextSpan(text: '4308374', style: kTableValuesContentTextStyle),
+                             new TextSpan(text: '$cases', style: kTableValuesContentTextStyle),
                            ],
                          ),
                        ),
@@ -108,7 +145,7 @@ class _LocationScreenState extends State<LocationScreen> {
                          text: new TextSpan(
                            children: <TextSpan>[
                              new TextSpan(text: 'Deaths:  ', style: kTableTitleTextStyle),
-                             new TextSpan(text: '160349', style: kTableValuesContentTextStyle),
+                             new TextSpan(text: '$deaths', style: kTableValuesContentTextStyle),
                            ],
                          ),
                        ),
@@ -119,7 +156,7 @@ class _LocationScreenState extends State<LocationScreen> {
                          text: new TextSpan(
                            children: <TextSpan>[
                              new TextSpan(text: 'Recovered:  ', style: kTableTitleTextStyle),
-                             new TextSpan(text: '34097452', style: kTableValuesContentTextStyle),
+                             new TextSpan(text: '$recovered', style: kTableValuesContentTextStyle),
                            ],
                          ),
                        ),
@@ -134,7 +171,6 @@ class _LocationScreenState extends State<LocationScreen> {
             ],
           ),
         ),
-      ),
-    );
+      );
   }
 }
