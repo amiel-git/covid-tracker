@@ -16,7 +16,9 @@ class Location {
       //Translate coordinates
       var coordinates = new Coordinates(latitude, longitude);
       var address = await Geocoder.local.findAddressesFromCoordinates(coordinates);
-      country = address.first.countryName;
+      var _country_raw = address.first.countryName;
+      country =  _country_raw.toLowerCase().replaceAll(RegExp(' '), '-');
+
     } catch (e) {
       print(e);
     }

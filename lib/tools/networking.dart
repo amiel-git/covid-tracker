@@ -8,7 +8,6 @@ import 'package:covid_tracker/tools/location.dart';
 class NetworkHelper {
 
   var baseURL = 'https://api.covid19api.com';
-
   Future<dynamic> getLatestCountryData(String country) async {
 
     var url = '$baseURL/country/$country';
@@ -25,6 +24,25 @@ class NetworkHelper {
     } catch(e) {
       print(e);
     }
+
+  }
+
+  Future<dynamic> getAllSummaryData() async {
+
+    try {
+      var response = await http.get(baseURL + '/summary');
+      if (response.statusCode == 200) {
+
+        var data = jsonDecode(response.body);
+        print(data);
+      }
+      else {
+        print(response.statusCode);
+      }
+    } catch (e) {
+      print(e);
+    }
+
 
   }
 

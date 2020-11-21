@@ -6,6 +6,7 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:covid_tracker/tools/location.dart';
 import 'package:covid_tracker/tools/networking.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:covid_tracker/screens/listScreen.dart';
 
 class LocationScreen extends StatefulWidget {
   @override
@@ -13,6 +14,7 @@ class LocationScreen extends StatefulWidget {
 }
 
 class _LocationScreenState extends State<LocationScreen> {
+
   String country = "";
   int cases = 0;
   int deaths = 0;
@@ -51,18 +53,7 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
 
-    return Scaffold(
-        bottomNavigationBar: CurvedNavigationBar(
-          height: 48,
-          backgroundColor: Color(0xFF389FA7),
-          items: <Widget>[
-            Icon(Icons.pin_drop, size: 25),
-            Icon(Icons.list, size: 25),
-            Icon(Icons.search, size: 25),
-          ],
-        ),
-        backgroundColor: Color(0xFF389FA7),
-        body: SafeArea(
+    return SafeArea(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -75,8 +66,8 @@ class _LocationScreenState extends State<LocationScreen> {
                     child: GestureDetector(
                         onTap: () {
                           EasyLoading.show(status: 'loading...');
-                            getDataAndUpdateUI();
 
+                            //TODO: Function to view essential things to do to avoid covid
                         },
                         child: Icon(Icons.local_hospital,color: Colors.white,size: 45.0,)
                     ),
@@ -170,7 +161,6 @@ class _LocationScreenState extends State<LocationScreen> {
               )
             ],
           ),
-        ),
       );
   }
 }
