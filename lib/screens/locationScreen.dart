@@ -26,7 +26,7 @@ class _LocationScreenState extends State<LocationScreen> {
   void initState() {
     // TODO: implement initState
     getDataAndUpdateUI();
-
+    NetworkHelper().getAllSummaryData();
     super.initState();
 
   }

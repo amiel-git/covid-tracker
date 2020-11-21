@@ -28,4 +28,4 @@ TextStyle kCardTitleTextStyle = TextStyle(color: Colors.grey, fontWeight: FontWe
     fontFamily: 'Montseratt', fontSize: 13.0);
 
 TextStyle kCardValuesContentTextStyle = TextStyle(color: Colors.grey, fontWeight: FontWeight.w400,
-    fontFamily: 'Montseratt', fontSize: 11.0);
+    fontFamily: 'Montseratt', fontSize: 12.0);

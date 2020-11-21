@@ -1,7 +1,7 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 import 'package:covid_tracker/tools/location.dart';
+import 'package:covid_tracker/classes/country.dart';
 
 
 
@@ -27,18 +27,23 @@ class NetworkHelper {
 
   }
 
-  Future<dynamic> getAllSummaryData() async {
-
+  Future<List<Country>> getAllSummaryData() async {
+    List<Country> data = List<Country>();
     try {
       var response = await http.get(baseURL + '/summary');
       if (response.statusCode == 200) {
 
-        var data = jsonDecode(response.body);
-        print(data);
+        var rawData = jsonDecode(response.body)['Countries'];
+
+        for(var item in rawData) {
+          data.add(Country.fromJson(item));
+        }
+        return data;
       }
       else {
         print(response.statusCode);
       }
+
     } catch (e) {
       print(e);
     }
