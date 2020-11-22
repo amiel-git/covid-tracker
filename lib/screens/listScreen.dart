@@ -48,9 +48,12 @@ class _ListScreenState extends State<ListScreen> {
                     separatorBuilder: (BuildContext context, int index) => const Divider(),
                     itemCount: widget.covidData.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return ReusableCard(country: widget.covidData[index].country,);
-
-
+                      return ReusableCard(
+                          country: widget.covidData[index].country,
+                      new_cases: widget.covidData[index].new_cases,
+                      new_deaths: widget.covidData[index].new_deaths,
+                      activeCases: widget.covidData[index].activeCases,
+                      date: widget.covidData[index].date,);
                     },
 
              ),
