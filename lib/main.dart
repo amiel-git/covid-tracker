@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:covid_tracker/screens/listScreen.dart';
 import 'package:covid_tracker/utilities/constants.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:covid_tracker/screens/chartScreen.dart';
 
 void main() {
   runApp( MaterialApp(
@@ -46,6 +47,10 @@ void main() {
                   widget.child = new ListScreen();
                   // Navigator.push(context, MaterialPageRoute(
                   //     builder: (context) => new CovidTrackerApp(child: ListScreen())));
+                }
+
+                else {
+                  widget.child = new ChartScreen();
                 }
                 });
             },
