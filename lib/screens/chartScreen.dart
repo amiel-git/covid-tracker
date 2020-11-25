@@ -17,8 +17,6 @@ class _ChartScreenState extends State<ChartScreen> {
     _getHistoricalData();
     super.initState();
 
-
-
   }
 
   void _getHistoricalData() async {
@@ -45,7 +43,10 @@ class _ChartScreenState extends State<ChartScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          ChartCard(historicalData: covidData,)
+          Container(
+              height: MediaQuery.of(context).size.height * 0.3,
+              margin: EdgeInsets.only(left: 10.0, right: 10.0),
+              child: ChartCard(historicalData: covidData,))
         ],
       ),
     );
