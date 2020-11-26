@@ -7,6 +7,7 @@ import 'package:covid_tracker/utilities/reusableCard.dart';
 import 'package:covid_tracker/tools/networking.dart';
 import 'package:covid_tracker/classes/country.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:covid_tracker/screens/chartScreen.dart';
 
 
 class ListScreen extends StatefulWidget {
@@ -70,7 +71,18 @@ class _ListScreenState extends State<ListScreen> {
         new_cases: _covidDataForDisplay[index].new_cases,
         new_deaths: _covidDataForDisplay[index].new_deaths,
         activeCases: _covidDataForDisplay[index].activeCases,
-        date: _covidDataForDisplay[index].date);
+        date: _covidDataForDisplay[index].date,
+        onTap: () {
+
+          Navigator.push(context, MaterialPageRoute(builder: (context) {
+
+            return ChartScreen(country: _covidDataForDisplay[index].country);
+
+          }));
+
+        });
+
+
   }
 
   _searchBar() {

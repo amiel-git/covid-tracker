@@ -33,8 +33,7 @@ void main() {
             backgroundColor: kBackgroundColor,
             items: <Widget>[
               Icon(Icons.pin_drop, size: 25),
-              Icon(Icons.list, size: 25),
-              Icon(Icons.search, size: 25),
+              Icon(Icons.list, size: 25)
             ],
             onTap: (index) {
                 setState(() {
@@ -45,13 +44,8 @@ void main() {
                 }
                 else if (index == 1) {
                   widget.child = new ListScreen();
-                  // Navigator.push(context, MaterialPageRoute(
-                  //     builder: (context) => new CovidTrackerApp(child: ListScreen())));
                 }
 
-                else {
-                  widget.child = new ChartScreen();
-                }
                 });
             },
           ),
