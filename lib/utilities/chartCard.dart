@@ -15,6 +15,10 @@ class ChartCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
      return SfCartesianChart(
+       zoomPanBehavior: ZoomPanBehavior(
+         enablePanning: true,
+         enablePinching: true
+       ),
          margin: EdgeInsets.only(left: 10.0, right: 10.0),
        backgroundColor: Colors.grey[500],
          primaryXAxis: CategoryAxis(),
